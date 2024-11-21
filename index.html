@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Poxelbox-Simple-Animation-Selection</title>
+    <script>
+        const searchArr = (x)=>Array.from(document.querySelectorAll(x));
+        const evtSend= evt=>{ const x = evt.target; const v = x.getAttribute('ep') + (x.type === 'button' ? '' : x.value); fetch(v); };
+        const mkEvt = (type)=>elm=>elm.addEventListener(type, evtSend);
+
+        const handleInp = (evtType) => elm=> {
+            elm.addEventListener(evtType, evtSend);
+            if(elm.type !== 'button')
+                elm.value = settings[elm.getAttribute('base')];
+        };
+
+        window.onload=()=>{
+            searchArr(`input[type='button']`).forEach(handleInp('click'));
+            searchArr(`input[type='range']`).forEach(handleInp('change'));
+        };
+    </script>
+</head>
+<body>
+    <h1>Poxelbox-Simple-Animation-Selection</h1>
+    <p>Please select the animation that shall play below</p>
+    <input type='button' value='Rainbow' ep='mode/1'>
+    <input type='button' value='Points' ep='mode/2'>
+    <input type='button' value='Off' ep='mode/3'>
+    <input type='button' value='Random' ep='mode/4'>
+    <p>Rainbow-Speed</p>
+    <input type='range' min='0' max='254' base='0' ep='srbow/s'>
+    <p>Rainbow Offset X</p>
+    <input type='range' min='1' max='100' base='1' ep='srbow/x'>
+    <p>Rainbow Offset Y</p>
+    <input type='range' min='1' max='100' base='2' ep='srbow/y'>
+    <p>Random Offline chance</p>
+    <input type='range' min='1' max='50' base='3' ep='rdm/c'>
+</body>
+</html>
